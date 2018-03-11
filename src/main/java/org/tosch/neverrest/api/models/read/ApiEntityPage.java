@@ -2,7 +2,7 @@ package org.tosch.neverrest.api.models.read;
 
 import java.util.List;
 
-public class ApiEntityPage<A extends ApiEntity> {
+public class ApiEntityPage<A extends ApiEntity<?, ?, ?, ?>> {
     private List<A> items;
     private Integer offset;
     private Integer limit;
