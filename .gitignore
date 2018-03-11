@@ -1,4 +1,5 @@
 .sts4-cache
 .gradle
 .vscode
+.settings
 bin
