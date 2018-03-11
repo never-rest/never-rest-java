@@ -4,6 +4,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 import org.tosch.neverrest.data.models.CoreDataEntity;
 
 @NoRepositoryBean
-public interface CouchbaseCoreEntityRepository<D extends CoreDataEntity> extends CouchbaseEntityRepository<D, String>, CoreEntityRepository<D> {
+public interface CouchbaseCoreEntityRepository<D extends CoreDataEntity<String>>
+        extends CoreEntityRepository<D, String> {
 
 }

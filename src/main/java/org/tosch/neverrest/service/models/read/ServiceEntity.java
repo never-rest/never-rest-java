@@ -13,12 +13,12 @@ public abstract class ServiceEntity<
         S extends ServiceEntity<S, C, U, D>,
         C extends ServiceCreateEntity<S, D>,
         U extends ServiceUpdateEntity<S, D>,
-        D extends DataEntity<?>> {
+        D extends DataEntity> {
     public ServiceEntity(D dataEntity) {
 
     }
 
-    public static <S extends ServiceEntity<S, ?, ?, D>, D extends DataEntity<?>> S fromData(
+    public static <S extends ServiceEntity<S, ?, ?, D>, D extends DataEntity> S fromData(
             D dataEntity, Class<S> serviceEntityClass) {
         if (dataEntity == null) {
             return null;

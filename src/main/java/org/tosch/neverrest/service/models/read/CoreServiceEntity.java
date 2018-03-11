@@ -5,19 +5,23 @@ import org.tosch.neverrest.data.models.CoreDataEntity;
 import org.tosch.neverrest.service.models.create.CoreServiceCreateEntity;
 import org.tosch.neverrest.service.models.update.CoreServiceUpdateEntity;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 public abstract class CoreServiceEntity<
-        S extends CoreServiceEntity<S, C, U, D>,
-        C extends CoreServiceCreateEntity<S, D>,
-        U extends CoreServiceUpdateEntity<S, D>,
-        D extends CoreDataEntity> extends ServiceEntity<S, C, U, D> {
-    public CoreServiceEntity(D dataEntity) {
-        super(dataEntity);
-        this.uuid = UUID.fromString(dataEntity.getUuid());
-        this.createdAt = dataEntity.getCreatedAt();
-        this.modifiedAt = dataEntity.getModifiedAt();
+        S extends CoreServiceEntity<S, C, U, D, ID>,
+        C extends CoreServiceCreateEntity<S, D, ID>,
+        U extends CoreServiceUpdateEntity<S, D, ID>,
+        D extends CoreDataEntity<ID>,
+        ID extends Serializable> extends ServiceEntity<S, C, U, D> {
+    public CoreServiceEntity(D coreDataEntity) {
+        super(coreDataEntity);
+        this.uuid = parseId(coreDataEntity.getId());
+        this.createdAt = coreDataEntity.getCreatedAt();
+        this.modifiedAt = coreDataEntity.getModifiedAt();
     }
+
+    public abstract UUID parseId(ID id);
 
     private final UUID uuid;
     private final DateTime createdAt;
