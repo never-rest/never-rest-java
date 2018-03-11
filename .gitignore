@@ -2,5 +2,9 @@
 .gradle
 .vscode
 .settings
+.idea
+.classpath
+.project
 bin
 build
+classes
