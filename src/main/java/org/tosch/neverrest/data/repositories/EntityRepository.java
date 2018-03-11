@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Optional;
 
 @NoRepositoryBean
-public interface DataEntityRepository<D extends DataEntity<ID>, ID extends Serializable> extends CrudRepository<D, ID> {
+public interface EntityRepository<D extends DataEntity<ID>, ID extends Serializable> extends CrudRepository<D, ID> {
     default Optional<D> findById(ID id) {
         return this.findById(id);
     }

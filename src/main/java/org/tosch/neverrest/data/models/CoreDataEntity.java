@@ -1,10 +1,8 @@
 package org.tosch.neverrest.data.models;
 
-import java.util.UUID;
-
 import org.joda.time.DateTime;
 
-public abstract class CoreDataEntity extends DataEntity<UUID> {
+public abstract class CoreDataEntity extends DataEntity<String> {
     private DateTime createdAt;
     private DateTime modifiedAt;
 
