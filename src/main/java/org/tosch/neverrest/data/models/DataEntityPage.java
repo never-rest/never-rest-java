@@ -1,12 +1,10 @@
 package org.tosch.neverrest.data.models;
 
-import java.io.Serializable;
-
 public class DataEntityPage<D extends DataEntity> {
     private Iterable<D> items;
-    private Integer offset;
+    private long offset;
     private Integer limit;
-    private Long size;
+    private long size;
 
     public Iterable<D> getItems() {
         return items;
@@ -16,11 +14,11 @@ public class DataEntityPage<D extends DataEntity> {
         this.items = items;
     }
 
-    public Integer getOffset() {
+    public long getOffset() {
         return offset;
     }
 
-    public void setOffset(Integer offset) {
+    public void setOffset(long offset) {
         this.offset = offset;
     }
 
@@ -32,11 +30,11 @@ public class DataEntityPage<D extends DataEntity> {
         this.limit = limit;
     }
 
-    public Long getSize() {
+    public long getSize() {
         return size;
     }
 
-    public void setSize(Long size) {
+    public void setSize(long size) {
         this.size = size;
     }
 }
