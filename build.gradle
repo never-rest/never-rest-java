@@ -26,6 +26,7 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter')
+	compile('org.springframework.boot:spring-boot-starter-data-redis')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.data:spring-data-couchbase:2.1.1.RELEASE')
 	compile('org.elasticsearch:elasticsearch:2.3.2')
