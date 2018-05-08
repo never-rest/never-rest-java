@@ -4,9 +4,9 @@ import java.util.List;
 
 public class ServiceEntityPage<S extends ServiceEntity<S, ?, ?, ?>> {
     private List<S> items;
-    private Integer offset;
-    private Integer limit;
-    private Long size;
+    private long offset;
+    private int limit;
+    private long size;
 
     public List<S> getItems() {
         return items;
@@ -16,27 +16,25 @@ public class ServiceEntityPage<S extends ServiceEntity<S, ?, ?, ?>> {
         this.items = items;
     }
 
-    public Integer getOffset() {
+    public long getOffset() {
         return offset;
     }
 
-    public void setOffset(Integer offset) {
-        this.offset = offset;
-    }
+    public void setOffset(long offset) { this.offset = offset; }
 
-    public Integer getLimit() {
+    public int getLimit() {
         return limit;
     }
 
-    public void setLimit(Integer limit) {
+    public void setLimit(int limit) {
         this.limit = limit;
     }
 
-    public Long getSize() {
+    public long getSize() {
         return size;
     }
 
-    public void setSize(Long size) {
+    public void setSize(long size) {
         this.size = size;
     }
 }
