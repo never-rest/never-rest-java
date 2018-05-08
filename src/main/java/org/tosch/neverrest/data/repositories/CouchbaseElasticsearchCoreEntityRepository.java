@@ -17,6 +17,7 @@ public interface CouchbaseElasticsearchCoreEntityRepository<D extends CoreDataEn
                 .setTypes("couchbaseDocument")
                 .setFrom(offset)
                 .setSize(limit)
+                //.addSort()  // TODO: add sorting capability for elastic
                 .execute().actionGet();
 
         List<String> ids = new ArrayList<>();
