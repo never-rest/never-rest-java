@@ -5,14 +5,14 @@ import org.elasticsearch.client.Client;
 import org.elasticsearch.search.SearchHit;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.tosch.neverrest.data.models.CoreDataEntity;
-import org.tosch.neverrest.data.models.CoreDataEntityPage;
+import org.tosch.neverrest.data.models.DataEntityPage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @NoRepositoryBean
 public interface CouchbaseElasticsearchCoreEntityRepository<D extends CoreDataEntity<String>> extends CouchbaseCoreEntityRepository<D> {
-    default CoreDataEntityPage<D, String> getPage(Client client, String index, int offset, int limit) {
+    default DataEntityPage<D> getPage(Client client, String index, int offset, int limit) {
         SearchResponse searchResponse = client.prepareSearch(index)
                 .setTypes("couchbaseDocument")
                 .setFrom(offset)
@@ -25,7 +25,7 @@ public interface CouchbaseElasticsearchCoreEntityRepository<D extends CoreDataEn
             ids.add(searchHitFields.getId());
         }
 
-        CoreDataEntityPage<D, String> coreDataEntityPage = new CoreDataEntityPage<>();
+        DataEntityPage<D> coreDataEntityPage = new DataEntityPage<>();
         coreDataEntityPage.setOffset(offset);
         coreDataEntityPage.setLimit(limit);
         coreDataEntityPage.setSize(searchResponse.getHits().totalHits());

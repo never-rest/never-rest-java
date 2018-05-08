@@ -9,11 +9,10 @@ import java.io.Serializable;
 import java.util.UUID;
 
 public abstract class CoreServiceEntity<
-        S extends CoreServiceEntity<S, C, U, D, ID>,
-        C extends CoreServiceCreateEntity<S, D, ID>,
-        U extends CoreServiceUpdateEntity<S, D, ID>,
-        D extends CoreDataEntity<ID>,
-        ID extends Serializable> extends ServiceEntity<S, C, U, D> {
+        S extends CoreServiceEntity<S, C, U, D>,
+        C extends CoreServiceCreateEntity<S, D>,
+        U extends CoreServiceUpdateEntity<S, D>,
+        D extends CoreDataEntity<? extends Serializable>> extends ServiceEntity<S, C, U, D> {
     public CoreServiceEntity(D coreDataEntity) {
         super(coreDataEntity);
         this.uuid = parseId(coreDataEntity.getId());
@@ -21,7 +20,7 @@ public abstract class CoreServiceEntity<
         this.modifiedAt = coreDataEntity.getModifiedAt();
     }
 
-    public abstract UUID parseId(ID id);
+    public abstract <ID extends Serializable> UUID parseId(ID id);
 
     private final UUID uuid;
     private final DateTime createdAt;

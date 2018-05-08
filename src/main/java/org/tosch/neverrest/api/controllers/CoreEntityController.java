@@ -11,6 +11,7 @@ import org.tosch.neverrest.service.models.read.CoreServiceEntity;
 import org.tosch.neverrest.service.models.update.CoreServiceUpdateEntity;
 import org.tosch.neverrest.service.services.CoreEntityService;
 
+import java.io.Serializable;
 import java.util.Set;
 import java.util.UUID;
 
@@ -21,12 +22,12 @@ public abstract class CoreEntityController<
         S extends CoreServiceEntity<S, SC, SU, ?>,
         SC extends CoreServiceCreateEntity<S, ?>,
         SU extends CoreServiceUpdateEntity<S, ?>> extends EntityController<A, AC, AU, S, SC, SU> {
-    public CoreEntityController(CoreEntityService<S, SC, SU, ?> coreEntityService) {
+    public CoreEntityController(CoreEntityService<S, SC, SU, ?, ? extends Serializable> coreEntityService) {
         super(coreEntityService);
         this.abstractCoreEntityService = coreEntityService;
     }
 
-    private final CoreEntityService<S, SC, SU, ?> abstractCoreEntityService;
+    private final CoreEntityService<S, SC, SU, ?, ? extends Serializable> abstractCoreEntityService;
 
     protected boolean hasGetByUuid() {
         return true;

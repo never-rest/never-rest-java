@@ -3,26 +3,22 @@ package org.tosch.neverrest.service.services.impl;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.tosch.neverrest.data.models.CoreDataEntity;
-import org.tosch.neverrest.data.models.CoreDataEntityPage;
 import org.tosch.neverrest.data.repositories.CoreEntityRepository;
 import org.tosch.neverrest.service.models.create.CoreServiceCreateEntity;
 import org.tosch.neverrest.service.models.read.CoreServiceEntity;
-import org.tosch.neverrest.service.models.read.CoreServiceEntityPage;
 import org.tosch.neverrest.service.models.update.CoreServiceUpdateEntity;
 import org.tosch.neverrest.service.services.CoreEntityService;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 public abstract class CoreEntityServiceImpl<
-        S extends CoreServiceEntity<S, C, U, D, ID>,
-        C extends CoreServiceCreateEntity<S, D, ID>,
-        U extends CoreServiceUpdateEntity<S, D, ID>,
+        S extends CoreServiceEntity<S, C, U, D>,
+        C extends CoreServiceCreateEntity<S, D>,
+        U extends CoreServiceUpdateEntity<S, D>,
         D extends CoreDataEntity<ID>,
-        ID extends Serializable> implements CoreEntityService<S, C, U, D, ID> {
+        ID extends Serializable> extends EntityServiceImpl<S, C, U, D>  implements CoreEntityService<S, C, U, D, ID> {
     public CoreEntityServiceImpl(CoreEntityRepository<D, ID> coreEntityRepository) {
         this.coreEntityRepository = coreEntityRepository;
     }
@@ -83,18 +79,6 @@ public abstract class CoreEntityServiceImpl<
         entityToUpdate.setModifiedAt(DateTime.now(DateTimeZone.UTC));
     }
 
-    protected CoreServiceEntityPage<S> getServiceEntityPage(CoreDataEntityPage<D, ID> coreDataEntityPage) {
-        CoreServiceEntityPage<S> serviceEntityPage = new CoreServiceEntityPage<>();
-        List<S> items = new ArrayList<>();
-        coreDataEntityPage.getItems().forEach(i -> items.add(S.fromData(i, getServiceEntityClass())));
-        serviceEntityPage.setItems(items);
-        serviceEntityPage.setOffset(coreDataEntityPage.getOffset());
-        serviceEntityPage.setLimit(coreDataEntityPage.getLimit());
-        serviceEntityPage.setSize(coreDataEntityPage.getSize());
-        return serviceEntityPage;
-    }
-
-    protected abstract Class<S> getServiceEntityClass();
     protected abstract void resolveRelationships(C serviceCreateEntity, D dataEntity);
     protected abstract void resolveRelationships(U serviceUpdateEntity, D dataEntity);
 }

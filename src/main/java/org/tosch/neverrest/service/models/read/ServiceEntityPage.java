@@ -1,18 +1,18 @@
-package org.tosch.neverrest.data.models;
+package org.tosch.neverrest.service.models.read;
 
-import java.io.Serializable;
+import java.util.List;
 
-public class CoreDataEntityPage<D extends CoreDataEntity<ID>, ID extends Serializable> {
-    private Iterable<D> items;
+public class ServiceEntityPage<S extends ServiceEntity<S, ?, ?, ?>> {
+    private List<S> items;
     private Integer offset;
     private Integer limit;
     private Long size;
 
-    public Iterable<D> getItems() {
+    public List<S> getItems() {
         return items;
     }
 
-    public void setItems(Iterable<D> items) {
+    public void setItems(List<S> items) {
         this.items = items;
     }
 

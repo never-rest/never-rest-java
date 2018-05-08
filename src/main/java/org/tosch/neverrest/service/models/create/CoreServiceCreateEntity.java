@@ -5,6 +5,6 @@ import org.tosch.neverrest.service.models.read.CoreServiceEntity;
 
 import java.io.Serializable;
 
-public abstract class CoreServiceCreateEntity<S extends CoreServiceEntity<S, ?, ?, D, ID>, D extends CoreDataEntity<ID>, ID extends Serializable>
+public abstract class CoreServiceCreateEntity<S extends CoreServiceEntity<S, ?, ?, D>, D extends CoreDataEntity<? extends Serializable>>
         extends ServiceCreateEntity<S, D> {
 }
