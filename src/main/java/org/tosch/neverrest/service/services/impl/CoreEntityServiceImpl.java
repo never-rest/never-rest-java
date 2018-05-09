@@ -1,7 +1,5 @@
 package org.tosch.neverrest.service.services.impl;
 
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.tosch.neverrest.data.models.CoreDataEntity;
 import org.tosch.neverrest.data.repositories.CoreEntityRepository;
 import org.tosch.neverrest.service.models.create.CoreServiceCreateEntity;
@@ -10,11 +8,14 @@ import org.tosch.neverrest.service.models.update.CoreServiceUpdateEntity;
 import org.tosch.neverrest.service.services.CoreEntityService;
 
 import java.io.Serializable;
+import java.time.Clock;
+import java.time.Instant;
+import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
 public abstract class CoreEntityServiceImpl<
-        S extends CoreServiceEntity<S, C, U, D>,
+        S extends CoreServiceEntity<S, C, U, D, ?>,
         C extends CoreServiceCreateEntity<S, D>,
         U extends CoreServiceUpdateEntity<S, D>,
         D extends CoreDataEntity<ID>,
@@ -27,7 +28,7 @@ public abstract class CoreEntityServiceImpl<
 
     @Override
     public S findByUuid(UUID uuid) {
-        ID id = coreEntityRepository.parseUuid(uuid);
+        ID id = parseUuid(uuid);
         Optional<D> dataEntity = coreEntityRepository.findById(id);
 
         if (!dataEntity.isPresent()) {
@@ -40,8 +41,8 @@ public abstract class CoreEntityServiceImpl<
     @Override
     public S create(C serviceCreateEntity) {
         D dataEntity = serviceCreateEntity.toData();
-        dataEntity.setCreatedAt(DateTime.now(DateTimeZone.UTC));
-        dataEntity.setModifiedAt(dataEntity.getCreatedAt());
+        dataEntity.setCreatedAt(Date.from(Instant.now(Clock.systemUTC())));
+        dataEntity.setUpdatedAt(dataEntity.getCreatedAt());
         resolveRelationships(serviceCreateEntity, dataEntity);
         D createdDataEntity = coreEntityRepository.save(dataEntity);
         return S.fromData(createdDataEntity, getServiceEntityClass());
@@ -49,7 +50,7 @@ public abstract class CoreEntityServiceImpl<
 
     @Override
     public S update(UUID uuid, U serviceUpdateEntity) {
-        ID id = coreEntityRepository.parseUuid(uuid);
+        ID id = parseUuid(uuid);
         Optional<D> existingDataEntity = coreEntityRepository.findById(id);
 
         if (!existingDataEntity.isPresent()) {
@@ -65,7 +66,7 @@ public abstract class CoreEntityServiceImpl<
 
     @Override
     public Boolean delete(UUID uuid) {
-        ID id = coreEntityRepository.parseUuid(uuid);
+        ID id = parseUuid(uuid);
         Boolean exists = coreEntityRepository.existsById(id);
 
         if (exists) {
@@ -76,7 +77,7 @@ public abstract class CoreEntityServiceImpl<
     }
 
     protected void updateEntity(D entityToUpdate, D updateEntity) {
-        entityToUpdate.setModifiedAt(DateTime.now(DateTimeZone.UTC));
+        entityToUpdate.setUpdatedAt(Date.from(Instant.now(Clock.systemUTC())));
     }
 
     protected abstract void resolveRelationships(C serviceCreateEntity, D dataEntity);

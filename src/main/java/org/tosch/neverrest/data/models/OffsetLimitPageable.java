@@ -4,17 +4,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 public class OffsetLimitPageable implements Pageable {
-    public OffsetLimitPageable(int offset, int limit) {
+    public OffsetLimitPageable(long offset, int limit) {
         this(offset, limit, Sort.unsorted());
     }
 
-    public OffsetLimitPageable(int offset, int limit, Sort sort) {
+    public OffsetLimitPageable(long offset, int limit, Sort sort) {
         this.offset = offset;
         this.limit = limit;
         this.sort = sort;
     }
 
-    private final int offset;
+    private final long offset;
     private final int limit;
     private final Sort sort;
 

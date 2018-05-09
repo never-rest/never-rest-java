@@ -19,7 +19,7 @@ public abstract class CoreEntityController<
         A extends CoreApiEntity<A, AC, AU, S>,
         AC extends CoreApiCreateEntity<A, S, SC>,
         AU extends CoreApiUpdateEntity<A, S, SU>,
-        S extends CoreServiceEntity<S, SC, SU, ?>,
+        S extends CoreServiceEntity<S, SC, SU, ?, ?>,
         SC extends CoreServiceCreateEntity<S, ?>,
         SU extends CoreServiceUpdateEntity<S, ?>> extends EntityController<A, AC, AU, S, SC, SU> {
     public CoreEntityController(CoreEntityService<S, SC, SU, ?, ? extends Serializable> coreEntityService) {

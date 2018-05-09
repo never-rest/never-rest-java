@@ -7,11 +7,11 @@ import org.tosch.neverrest.data.models.CoreDataEntity;
 import org.tosch.neverrest.data.models.DataEntityPage;
 import org.tosch.neverrest.data.models.OffsetLimitPageable;
 
-import java.util.UUID;
+import java.io.Serializable;
 
 @NoRepositoryBean
-public interface SqlCoreEntityRepository<D extends CoreDataEntity<UUID>>
-        extends CoreEntityRepository<D, UUID>, PagingAndSortingRepository<D, UUID> {
+public interface SqlCoreEntityRepository<D extends CoreDataEntity<ID>, ID extends Serializable>
+        extends CoreEntityRepository<D, ID>, PagingAndSortingRepository<D, ID> {
     default DataEntityPage<D> getPage(OffsetLimitPageable offsetLimit) {
         Page<D> dataPage = findAll(offsetLimit);
         DataEntityPage<D> coreDataEntityPage = new DataEntityPage<>();

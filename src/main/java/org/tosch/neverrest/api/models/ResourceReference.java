@@ -6,7 +6,15 @@ import com.google.common.base.Strings;
 import java.util.UUID;
 
 public class ResourceReference implements ServiceConvertible<UUID> {
-    public ResourceReference(UUID uuid, String apiEntityUrlPath, String baseUrl) {
+    public static ResourceReference build(UUID uuid, String apiEntityUrlPath, String baseUrl) {
+        if (uuid == null) {
+            return null;
+        }
+
+        return new ResourceReference(uuid, apiEntityUrlPath, baseUrl);
+    }
+
+    private ResourceReference(UUID uuid, String apiEntityUrlPath, String baseUrl) {
         this.apiEntityUrlPath = apiEntityUrlPath;
         href = String.format("%s/%s/%s", baseUrl, apiEntityUrlPath, uuid);
     }

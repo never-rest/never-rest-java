@@ -9,11 +9,12 @@ import java.io.Serializable;
 import java.util.UUID;
 
 public interface CoreEntityService<
-        S extends CoreServiceEntity<S, C, U, D>,
+        S extends CoreServiceEntity<S, C, U, D, ?>,
         C extends CoreServiceCreateEntity<S, D>,
         U extends CoreServiceUpdateEntity<S, D>,
         D extends CoreDataEntity<ID>,
         ID extends Serializable> extends EntityService<S, C, U, D> {
+    ID parseUuid(UUID uuid);
     S findByUuid(UUID uuid);
     S create(C serviceCreateEntity);
     S update(UUID uuid, U serviceUpdateEntity);

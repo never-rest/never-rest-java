@@ -6,7 +6,7 @@ import org.tosch.neverrest.service.models.create.CoreServiceCreateEntity;
 
 public abstract class CoreApiCreateEntity<
         A extends CoreApiEntity<A, ?, ?, S>,
-        S extends CoreServiceEntity<S, ?, ?, ?>,
+        S extends CoreServiceEntity<S, ?, ?, ?, ?>,
         C extends CoreServiceCreateEntity<S, ?>>
         extends ApiCreateEntity<A, S, C> {
 }

@@ -6,7 +6,7 @@ import org.tosch.neverrest.service.models.update.CoreServiceUpdateEntity;
 
 public abstract class CoreApiUpdateEntity<
         A extends CoreApiEntity<A, ?, ?, S>,
-        S extends CoreServiceEntity<S, ?, ?, ?>,
+        S extends CoreServiceEntity<S, ?, ?, ?, ?>,
         U extends CoreServiceUpdateEntity<S, ?>>
         extends ApiUpdateEntity<A, S, U> {
 }

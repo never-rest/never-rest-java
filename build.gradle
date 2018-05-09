@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'maven'
 
 group = 'org.tosch.neverrest'
-version = '0.0.4'
+version = '0.0.8'
 sourceCompatibility = 1.8
 
 repositories {
@@ -11,8 +11,7 @@ repositories {
 
 
 dependencies {
-	compile('org.springframework.data:spring-data-couchbase:3.0.1.RELEASE')
+	compile('org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final')
+    compile('org.springframework.data:spring-data-couchbase:3.0.1.RELEASE')
 	compile('org.elasticsearch:elasticsearch:2.3.2')
-	compile('joda-time:joda-time:2.9.3')
-	compile('com.fasterxml.jackson.datatype:jackson-datatype-joda:2.6.3')
 }

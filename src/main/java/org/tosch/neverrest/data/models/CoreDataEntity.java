@@ -1,15 +1,16 @@
 package org.tosch.neverrest.data.models;
 
-import org.joda.time.DateTime;
-import org.springframework.data.annotation.Id;
-
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
+import java.util.Date;
 
+@MappedSuperclass
 public abstract class CoreDataEntity<ID extends Serializable> extends DataEntity {
     @Id
     private ID id;
-    private DateTime createdAt;
-    private DateTime modifiedAt;
+    private Date createdAt;
+    private Date updatedAt;
 
     public ID getId() {
         return this.id;
@@ -19,19 +20,19 @@ public abstract class CoreDataEntity<ID extends Serializable> extends DataEntity
         this.id = id;
     }
 
-    public DateTime getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(DateTime createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public DateTime getModifiedAt() {
-        return modifiedAt;
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setModifiedAt(DateTime modifiedAt) {
-        this.modifiedAt = modifiedAt;
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

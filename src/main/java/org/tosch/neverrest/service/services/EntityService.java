@@ -11,5 +11,5 @@ public interface EntityService<
         C extends ServiceCreateEntity<S, D>,
         U extends ServiceUpdateEntity<S, D>,
         D extends DataEntity> {
-    ServiceEntityPage<S> getPage(Integer offset, Integer limit);
+    ServiceEntityPage<S> getPage(long offset, int limit);
 }
